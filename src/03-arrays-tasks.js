@@ -35,8 +35,12 @@ function findElement(arr, value) {
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  function range(s = 1) {
+    return Array(len).fill().map((_, idx) => s + (idx * 2));
+  }
+  const result = range();
+  return result;
 }
 
 
@@ -118,8 +122,9 @@ function removeFalsyValues(arr) {
  *    => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ],
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
-function getUpperCaseStrings(/* arr */) {
-  throw new Error('Not implemented');
+function getUpperCaseStrings(arr) {
+  const result = arr.map((item) => item.toUpperCase());
+  return result;
 }
 
 
@@ -467,8 +472,13 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  function range(s, e, step = 1) {
+    const len = Math.floor((e - s) / step) + 1;
+    return Array(len).fill().map((_, idx) => s + (idx * step));
+  }
+  const result = range(start, end);
+  return result;
 }
 
 /**
@@ -482,8 +492,9 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const unique = arr.filter((v, i, a) => a.indexOf(v) === i);
+  return unique;
 }
 
 /**
