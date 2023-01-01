@@ -204,10 +204,30 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
-}
+function getRectangleString(width, height) {
+  const lineW = (content) => {
+    let l = '';
+    for (let i = 2; i < width; i += 1) {
+      l += `${content}`;
+    }
+    return l;
+  };
 
+  const start = `┌${lineW('─')}┐\n`;
+  const end = `└${lineW('─')}┘\n`;
+  const spaceBetween = `│${lineW(' ')}│\n`;
+
+  const lineH = () => {
+    let content = '';
+    for (let i = 2; i < height; i += 1) {
+      content += `${spaceBetween}`;
+    }
+    return content;
+  };
+
+  const result = `${start}${lineH()}${end}`;
+  return result;
+}
 
 /**
  * Encode specified string with ROT13 cipher

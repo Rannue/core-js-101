@@ -216,8 +216,23 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const start = (s) => {
+    if (s === true) {
+      return '[';
+    }
+    return '(';
+  };
+
+  const end = (e) => {
+    if (e === true) {
+      return ']';
+    }
+    return ')';
+  };
+
+  const result = `${start(isStartIncluded)}${a < b ? `${a}, ${b}` : `${b}, ${a}`}${end(isEndIncluded)}`;
+  return result;
 }
 
 
@@ -275,8 +290,21 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let s = 0;
+  let doubleDigit = false;
+  for (let i = ccn.length - 1; i >= 0; i -= 1) {
+    let digit = +ccn[i];
+    if (doubleDigit) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+    s += digit;
+    doubleDigit = !doubleDigit;
+  }
+  return s % 10 === 0;
 }
 
 /**
@@ -333,8 +361,23 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const map = {
+    ')': '(',
+    ']': '[',
+    '}': '{',
+    '>': '<',
+  };
+  const arr = [];
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === '(' || str[i] === '[' || str[i] === '{' || str[i] === '<') {
+      arr.push(str[i]);
+    } else if (arr[arr.length - 1] === map[str[i]]) {
+      arr.pop();
+    } else return false;
+  }
+  if (arr.length) return false;
+  return true;
 }
 
 
@@ -358,8 +401,9 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  const v = parseInt(`${num}`, n);
+  return v;
 }
 
 
