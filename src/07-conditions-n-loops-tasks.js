@@ -290,21 +290,8 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(ccn) {
-  let s = 0;
-  let doubleDigit = false;
-  for (let i = ccn.length - 1; i >= 0; i -= 1) {
-    let digit = +ccn[i];
-    if (doubleDigit) {
-      digit *= 2;
-      if (digit > 9) {
-        digit -= 9;
-      }
-    }
-    s += digit;
-    doubleDigit = !doubleDigit;
-  }
-  return s % 10 === 0;
+function isCreditCardNumber(/* ccn */) {
+  throw new Error('Not implemented');
 }
 
 /**
@@ -419,8 +406,25 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const arr = pathes.map((item) => item.split('/'));
+  let longest = 0;
+  arr.forEach((a) => {
+    if (a.length > longest) {
+      longest = a.length;
+    }
+  });
+  let result = arr.filter((a) => a[0] === '/').length === arr.length
+    ? '/'
+    : '';
+  for (let i = 0; i < longest; i += 1) {
+    const t = [];
+    arr.forEach((a) => t.push(a[i]));
+    if (t.every((item) => item === t[0])) {
+      result += `${t[0]}/`;
+    }
+  }
+  return result;
 }
 
 
